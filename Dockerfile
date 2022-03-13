@@ -48,6 +48,6 @@ RUN echo "LoadModule tile_module /usr/lib/apache2/modules/mod_tile.so" >> /etc/a
 
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 
-RUN service apache2 reload && service apache2 reload
+#RUN service apache2 reload && service apache2 reload
 
 CMD ["sh"]
