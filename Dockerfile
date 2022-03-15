@@ -23,7 +23,8 @@ RUN apt install -y build-essential \
   	libiniparser-dev \
   	libmapnik-dev \
   	libmemcached-dev \
-  	librados-dev
+  	librados-dev \
+  	fonts-noto-cjk fonts-noto-hinted fonts-noto-unhinted ttf-unifont
 
 RUN	git clone -b switch2osm git://github.com/SomeoneElseOSM/mod_tile.git && \
 	cd mod_tile && \
@@ -48,6 +49,6 @@ RUN echo "LoadModule tile_module /usr/lib/apache2/modules/mod_tile.so" >> /etc/a
 
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 
-#RUN service apache2 reload && service apache2 reload
+#ENTRYPOINT -> script to generate renderd.conf from env vars 
 
 CMD ["sh"]
