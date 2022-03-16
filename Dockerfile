@@ -57,7 +57,11 @@ RUN envsubst < renderd.conf.template > /etc/renderd.conf && \
 	
 RUN mkdir /var/lib/mod_tile && chown renderaccount /var/lib/mod_tile
 
-RUN mkdir /var/run/renderd && chown renderaccount /var/run/renderd
+RUN mkdir /var/run/renderd && chown renderaccount /var/run/renderd && cp /usr/local/bin/renderd /var/run/renderd/renderd
+
+RUN cp /app/mod_tile/debian/renderd.init /etc/init.d/renderd && \
+	chmod u+x /etc/init.d/renderd && \
+	cp /app/mod_tile/debian/renderd.service /lib/systemd/system/
 
 RUN echo "LoadModule tile_module /usr/lib/apache2/modules/mod_tile.so" >> /etc/apache2/conf-available/mod_tile.conf && \
 	a2enconf mod_tile
